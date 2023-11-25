@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "trd/SXf5czv/a53XsWidhhfnWjYWTYOJ3Ni3P/sUdiM=",
+  "Source": "FoulNet",
+  "BasePath": "_content/FoulNet",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "FoulNet\\wwwroot",
+      "Source": "FoulNet",
+      "ContentRoot": "C:\\Proyectos\\Foul\\FoulNet\\wwwroot\\",
+      "BasePath": "_content/FoulNet",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
