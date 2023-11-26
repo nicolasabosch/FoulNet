@@ -33,12 +33,10 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 
 builder.Services.AddDbContext<FoulNet.Entities>(options =>
 {
-
     options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection"));
 });
 builder.Services.AddDbContext<DbEntities>(options =>
 {
-
     options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection"));
 });
 
@@ -103,7 +101,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseCors("corsapp");
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 /*
 // Defaults to index.html
