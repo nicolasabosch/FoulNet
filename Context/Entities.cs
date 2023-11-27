@@ -74,8 +74,6 @@ public partial class Entities : DbEntities
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
-
 
         modelBuilder.Entity<Concept>(entity =>
         {
@@ -125,6 +123,7 @@ public partial class Entities : DbEntities
             entity.Property(e => e.HomeTeamID).HasComment("Equipo Local");
             entity.Property(e => e.MatchDate).HasComment("Fecha");
             entity.Property(e => e.MatchStatusID).HasComment("Código");
+            entity.Property(e => e.UserID).HasComment("User Id");
             entity.Property(e => e.ZoneID).HasComment("Zona");
 
             entity.HasOne(d => d.AwayTeam).WithMany(p => p.MatchAwayTeam)
@@ -138,6 +137,8 @@ public partial class Entities : DbEntities
             entity.HasOne(d => d.MatchStatus).WithMany(p => p.Match)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Match_MatchStatus");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Match).HasConstraintName("FK_Match_User");
 
             entity.HasOne(d => d.Zone).WithMany(p => p.Match)
                 .OnDelete(DeleteBehavior.ClientSetNull)

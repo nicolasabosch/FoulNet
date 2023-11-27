@@ -38,28 +38,31 @@ public class MatchController : ControllerBase
 
         var list = (
                  from Match in _context.Match
-             join MatchStatus in _context.MatchStatus on Match.MatchStatusID equals MatchStatus.MatchStatusID
-             join Zone in _context.Zone on Match.ZoneID equals Zone.ZoneID
-             join Home in _context.Team on Match.HomeTeamID equals Home.TeamID
-             join Away in _context.Team on Match.AwayTeamID equals Away.TeamID
-             select new
-             {
-                 Match.MatchID,
-                 Match.MatchDate,
-                 Match.ZoneID,
-                 Match.MatchStatusID,
-                 MatchStatus.MatchStatusName,
-                 Zone.ZoneName,
-                 Match.HomeTeamID,
-                 HomeTeamName = Home.TeamName,
-                 AwayTeamName = Away.TeamName,
-                 Match.AwayTeamID,
-                 Match.HomeGoals,
-                 Match.AwayGoals
+                 join MatchStatus in _context.MatchStatus on Match.MatchStatusID equals MatchStatus.MatchStatusID
+                 join Zone in _context.Zone on Match.ZoneID equals Zone.ZoneID
+                 join Home in _context.Team on Match.HomeTeamID equals Home.TeamID
+                 join Away in _context.Team on Match.AwayTeamID equals Away.TeamID
+                 from User in _context.User.Where(X => X.UserID == Match.UserID).DefaultIfEmpty()
+                 select new
+                 {
+                     Match.MatchID,
+                     Match.MatchDate,
+                     Match.ZoneID,
+                     Match.MatchStatusID,
+                     MatchStatus.MatchStatusName,
+                     Zone.ZoneName,
+                     Match.HomeTeamID,
+                     HomeTeamName = Home.TeamName,
+                     AwayTeamName = Away.TeamName,
+                     Match.AwayTeamID,
+                     Match.HomeGoals,
+                     Match.AwayGoals,
+                     Match.UserID,
+                     User.UserName
 
 
 
-             }
+                 }
 
          );
 
@@ -75,6 +78,13 @@ public class MatchController : ControllerBase
             int matchID = int.Parse(parameters["MatchID"]);
             list = list.Where(l => l.MatchID == matchID);
         }
+        if (parameters["UserID"] != null)
+        {
+            string userID = parameters["UserID"];
+            list = list.Where(l => l.UserID == userID);
+        }
+
+
 
         if (parameters["MatchDateFrom"] != null)
         {
@@ -118,6 +128,7 @@ public class MatchController : ControllerBase
      join Zone in _context.Zone on Match.ZoneID equals Zone.ZoneID
      join Home in _context.Team on Match.HomeTeamID equals Home.TeamID
      join Away in _context.Team on Match.AwayTeamID equals Away.TeamID
+     from User in _context.User.Where(X => X.UserID == Match.UserID).DefaultIfEmpty()
      where Match.MatchID == id
      select new
      {
@@ -139,7 +150,9 @@ public class MatchController : ControllerBase
          HomeTeam = new { Home.TeamID, Home.TeamName },
          AwayTeam = new { Away.TeamID, Away.TeamName },
          local= Home.TeamName,
-         visitante = Away.TeamName
+         visitante = Away.TeamName,
+         Match.UserID,
+         User = new {Match.UserID, User.UserName } 
 
 
      }).FirstAsync();

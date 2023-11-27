@@ -91,6 +91,9 @@ public partial class User  :IEntityRecord
      public string? LastModifiedBy { get; set; }
 
     [InverseProperty("User")]
+    public virtual ICollection<Match> Match { get; } = new List<Match>();
+
+    [InverseProperty("User")]
     public virtual ICollection<ProjectUser> ProjectUser { get; } = new List<ProjectUser>();
 
     [InverseProperty("User")]

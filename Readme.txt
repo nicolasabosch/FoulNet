@@ -12,4 +12,4 @@ dotnet new ef-templates
 
 dotnet add package Microsoft.EntityFrameworkCore.Design
 
-dotnet ef dbcontext scaffold "Data Source=arba-xarb034;Initial Catalog=Foul;User Id=sa;Password=Sql2017!;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -d --data-annotations  -o Model  -c  Entities  --context-dir Context --context-namespace FoulNet  -f --use-database-names --no-build --no-pluralize --no-onconfiguring	
+dotnet ef dbcontext scaffold "Data Source=SQL5105.site4now.net;Initial Catalog=db_a5e599_foul;User Id=db_a5e599_foul_admin;Password=Sql2019!;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -d --data-annotations  -o Model  -c  Entities  --context-dir Context --context-namespace FoulNet  -f --use-database-names --no-build --no-pluralize --no-onconfiguring	

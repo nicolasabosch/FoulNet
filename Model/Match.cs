@@ -53,6 +53,13 @@ public partial class Match  :IEntityRecord
     /// </summary>
      public int? AwayGoals { get; set; }
 
+    /// <summary>
+    /// User Id
+    /// </summary>
+    [StringLength(36)]
+    [Unicode(false)]
+     public string? UserID { get; set; }
+
      public DateTimeOffset? CreatedOn { get; set; }
 
     [StringLength(200)]
@@ -80,6 +87,11 @@ public partial class Match  :IEntityRecord
     [InverseProperty("Match")]
   
     public virtual MatchStatus? MatchStatus { get; set; } = null!;
+
+    [ForeignKey("UserID")]
+    [InverseProperty("Match")]
+  
+    public virtual User? User { get; set; }
 
     [ForeignKey("ZoneID")]
     [InverseProperty("Match")]

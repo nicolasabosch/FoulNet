@@ -210,6 +210,28 @@ namespace FoulNet.Controllers
             return user;
         }
 
+
+        [Route("Referees")]
+        [HttpGet]
+        public ActionResult Referees()
+        {
+
+            var list = (
+                from User in db.User
+                join UserRole in db.UserRole on User.UserID equals UserRole.UserID
+                where UserRole.RoleID == "REFEREE"
+                select new
+                {
+                    User.UserID,
+                    User.UserName
+                }
+
+            );
+
+            var ret = list.AsEnumerable();
+            return Ok(ret);
+        }
+
         private bool UserExists(string id)
         {
             return db.User.Any(e => e.UserID == id);
