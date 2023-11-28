@@ -28,6 +28,7 @@ public class MatchController : ControllerBase
 
     // GET api/Match
     [HttpGet]
+    [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<object>>> GetAll()
     {
 
@@ -58,7 +59,10 @@ public class MatchController : ControllerBase
                      Match.HomeGoals,
                      Match.AwayGoals,
                      Match.UserID,
-                     User.UserName
+                     User.UserName,
+                     localFileID = Home.FileID,
+                     awayFileID = Away.FileID,
+
 
 
 
